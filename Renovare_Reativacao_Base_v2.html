@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renovare — Reativação de Base | Descompliquei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Barlow+Condensed:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #E85D24;
+  --orange-glow: rgba(232,93,36,0.12);
+  --dark: #090909;
+  --dark2: #0f0f0f;
+  --dark3: #161616;
+  --dark4: #1e1e1e;
+  --mid: #2a2a2a;
+  --gray: #777;
+  --gray-light: #aaa;
+  --white: #f0f0f0;
+  --white-dim: rgba(240,240,240,0.65);
+  --white-faint: rgba(240,240,240,0.05);
+  --border: rgba(255,255,255,0.07);
+  --c1: #5B9CF6; --c2: #8B78F8; --c3: #F5A742;
+  --c4: #F55F7A; --c5: #F54A4A; --c6: #F57B35; --c7: #8ED45A;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--white);font-family:'Barlow',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden}
+
+/* noise */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:200;background:rgba(9,9,9,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 48px;overflow-x:auto;gap:0}
+nav::-webkit-scrollbar{height:0}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:17px;color:var(--orange);letter-spacing:.06em;padding:16px 0;margin-right:36px;white-space:nowrap;flex-shrink:0}
+nav a{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);text-decoration:none;padding:16px 14px;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
+nav a:hover{color:var(--white)}
+nav a.on{color:var(--orange);border-bottom-color:var(--orange)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 56px 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% 20%, rgba(232,93,36,.09) 0%, transparent 70%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:80px 80px;opacity:.4}
+.hero-kicker{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-kicker::before{content:'';width:28px;height:1px;background:var(--orange)}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,11vw,144px);line-height:.88;letter-spacing:.015em;color:var(--white)}
+.hero h1 em{color:var(--orange);font-style:normal;display:block}
+.hero-desc{font-size:16px;color:var(--gray-light);font-weight:300;max-width:480px;margin-top:28px;line-height:1.75}
+.hero-stats{display:flex;gap:48px;margin-top:52px;padding-top:40px;border-top:1px solid var(--border)}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--orange);line-height:1}
+.stat-l{font-size:11px;color:var(--gray);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+
+/* ── SECTIONS ── */
+.sec{padding:96px 56px;border-top:1px solid var(--border);position:relative}
+.sec-eye{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.sec-eye::before{content:'';width:22px;height:1px;background:var(--orange)}
+.sec-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,68px);line-height:.92;letter-spacing:.01em;margin-bottom:18px}
+.sec-p{font-size:15px;color:var(--gray-light);font-weight:300;max-width:600px;line-height:1.8}
+
+/* ── PIPELINE TRACK ── */
+.pipeline{display:flex;margin-top:52px;border:1px solid var(--border);overflow-x:auto}
+.pipe-item{flex:1;min-width:110px;padding:22px 16px;text-align:center;border-right:1px solid var(--border);position:relative}
+.pipe-item:last-child{border-right:none}
+.pipe-item.lit{border-top:2px solid var(--orange);background:rgba(232,93,36,.04)}
+.pipe-n{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--mid);line-height:1;margin-bottom:6px}
+.pipe-item.lit .pipe-n{color:var(--orange)}
+.pipe-label{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);line-height:1.3}
+.pipe-item.lit .pipe-label{color:var(--white)}
+.pipe-badge{margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--orange);opacity:.6}
+
+/* ── OVERVIEW CARDS ── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1px;background:var(--border);margin-top:52px;border:1px solid var(--border)}
+.card{background:var(--dark2);padding:28px 28px 32px;position:relative;overflow:hidden;cursor:default;transition:background .2s}
+.card:hover{background:var(--dark3)}
+.card-stripe{position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gc)}
+.card-ghost{position:absolute;bottom:12px;right:20px;font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--gc);opacity:.08;line-height:1;pointer-events:none}
+.card-tag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--gc);border:1px solid var(--gc);padding:3px 9px;border-radius:2px;display:inline-block;margin-bottom:14px;letter-spacing:.04em;opacity:.85}
+.card-name{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:.03em;color:var(--white);margin-bottom:8px;line-height:1.2}
+.card-desc{font-size:13px;color:var(--gray);line-height:1.6}
+.card-temp{display:inline-flex;align-items:center;gap:5px;margin-top:14px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);font-family:'Barlow Condensed',sans-serif}
+
+/* ── GROUP SECTION ── */
+.grp{padding:96px 56px;border-top:1px solid var(--border);position:relative;overflow:hidden}
+.grp-watermark{position:absolute;top:48px;right:52px;font-family:'Bebas Neue',sans-serif;font-size:120px;color:var(--gc);opacity:.035;line-height:1;letter-spacing:.02em;pointer-events:none;user-select:none}
+.grp-head{display:grid;grid-template-columns:1fr 300px;gap:56px;margin-bottom:56px;align-items:start}
+.grp-tag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--gc);border:1px solid var(--gc);padding:5px 13px;border-radius:2px;display:inline-block;margin-bottom:18px;letter-spacing:.04em}
+.grp-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,4vw,52px);line-height:.92;margin-bottom:18px}
+.grp-body{font-size:15px;color:var(--gray-light);font-weight:300;line-height:1.78;max-width:560px}
+.grp-info{background:var(--dark3);border:1px solid var(--border);border-left:3px solid var(--gc);padding:26px;display:flex;flex-direction:column;gap:18px}
+.info-l{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);font-family:'Barlow Condensed',sans-serif;margin-bottom:3px}
+.info-v{font-size:14px;color:var(--white);font-weight:500}
+
+/* ── CADENCE TRACK ── */
+.cadence{margin-top:12px}
+.cad-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.cad-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* message card */
+.msg-card{background:var(--dark2);border:1px solid var(--border);margin-bottom:8px;overflow:hidden;transition:border-color .2s}
+.msg-card:hover{border-color:rgba(232,93,36,.25)}
+.msg-head{display:flex;align-items:center;gap:0;padding:16px 22px;cursor:pointer;border-bottom:1px solid transparent;transition:background .15s;user-select:none}
+.msg-head:hover{background:var(--white-faint)}
+.msg-card.open .msg-head{border-bottom-color:var(--border);background:var(--dark3)}
+.msg-day{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gc);background:rgba(255,255,255,.04);border:1px solid var(--gc);padding:3px 9px;border-radius:2px;margin-right:16px;white-space:nowrap;opacity:.8;flex-shrink:0}
+.msg-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--white);flex:1}
+.msg-sub{font-size:12px;color:var(--gray);margin-left:14px;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+.msg-chevron{color:var(--gray);font-size:10px;margin-left:16px;transition:transform .2s;flex-shrink:0}
+.msg-card.open .msg-chevron{transform:rotate(180deg)}
+
+.msg-body{display:none;padding:24px 22px}
+.msg-card.open .msg-body{display:block}
+.msg-context{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-bottom:20px}
+.msg-ctx-item{background:var(--dark3);padding:14px 18px}
+.ctx-l{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);font-family:'Barlow Condensed',sans-serif;margin-bottom:5px}
+.ctx-v{font-size:13px;color:var(--white-dim);line-height:1.5}
+
+/* the actual WhatsApp bubble */
+.wa-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.wa-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.wa-bubble{background:var(--dark4);border-left:3px solid var(--gc);border-radius:0 4px 4px 0;padding:18px 52px 18px 20px;font-size:15px;line-height:1.72;color:var(--white-dim);position:relative;margin-bottom:0}
+.wa-copy{position:absolute;top:10px;right:10px;background:transparent;border:1px solid var(--mid);color:var(--gray);font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 9px;cursor:pointer;border-radius:2px;transition:all .2s;letter-spacing:.04em}
+.wa-copy:hover,.wa-copy.done{background:var(--orange);color:#fff;border-color:var(--orange)}
+
+.msg-note{margin-top:16px;padding:13px 17px;background:rgba(232,93,36,.05);border:1px solid rgba(232,93,36,.14);font-size:13px;color:var(--gray-light);line-height:1.65}
+.msg-note strong{color:var(--orange)}
+
+/* ── STRATEGY ── */
+.strat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);margin-top:48px;border:1px solid var(--border)}
+.strat-card{background:var(--dark2);padding:32px;transition:background .2s}
+.strat-card:hover{background:var(--dark3)}
+.strat-icon{font-size:26px;margin-bottom:18px;display:block}
+.strat-t{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--white);margin-bottom:10px}
+.strat-b{font-size:13px;color:var(--gray);line-height:1.72}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:44px 56px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.foot-brand{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--orange);letter-spacing:.06em}
+.foot-note{font-size:12px;color:var(--gray);font-weight:300}
+
+/* ── ANIM ── */
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero>*{animation:up .55s ease both}
+.hero>*:nth-child(1){animation-delay:.1s}
+.hero>*:nth-child(2){animation-delay:.2s}
+.hero>*:nth-child(3){animation-delay:.32s}
+.hero>*:nth-child(4){animation-delay:.44s}
+.hero>*:nth-child(5){animation-delay:.54s}
+
+/* scrollbar */
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--mid);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:var(--orange)}
+
+@media(max-width:768px){
+  .hero,.sec,.grp{padding:64px 24px}
+  nav{padding:0 24px}
+  .grp-head{grid-template-columns:1fr;gap:28px}
+  .grp-watermark{display:none}
+  .msg-context{grid-template-columns:1fr}
+  .hero-stats{gap:28px;flex-wrap:wrap}
+  footer{padding:36px 24px;flex-direction:column;align-items:flex-start}
+  .pipeline{overflow-x:auto}
+  .pipe-item{min-width:90px;padding:16px 10px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Descompliquei</div>
+  <a href="#overview">Visão Geral</a>
+  <a href="#g1">G1</a><a href="#g2">G2</a><a href="#g3">G3</a>
+  <a href="#g4">G4</a><a href="#g5">G5</a><a href="#g6">G6</a><a href="#g7">G7</a>
+  <a href="#exec">Execução</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-kicker">Clínica Renovare &nbsp;·&nbsp; Reativação de Base</div>
+  <h1>REATIVE.<br><em>RECONQUISTE.</em></h1>
+  <p class="hero-desc">Guia completo de segmentação e cadências de follow-up para reativação da base de leads da Renovare — construído sobre a metodologia comercial da Descompliquei.</p>
+  <div class="hero-stats">
+    <div><div class="stat-n">7</div><div class="stat-l">Grupos</div></div>
+    <div><div class="stat-n">35+</div><div class="stat-l">Mensagens</div></div>
+    <div><div class="stat-n">4</div><div class="stat-l">Momentos</div></div>
+    <div><div class="stat-n">5</div><div class="stat-l">Dias de cadência</div></div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="sec" id="overview">
+  <div class="sec-eye">Metodologia</div>
+  <div class="sec-h">OS 7 GRUPOS<br>DE REATIVAÇÃO</div>
+  <p class="sec-p">Cada lead parou em um ponto diferente da jornada. Enviar a mesma mensagem para todos é o caminho mais rápido para gastar energia e não converter ninguém. A segmentação por etiqueta garante abordagem certa, no momento certo, para cada perfil.</p>
+
+  <div class="pipeline">
+    <div class="pipe-item lit"><div class="pipe-n">—</div><div class="pipe-label">Sem Resposta</div><div class="pipe-badge">G1 · G2</div></div>
+    <div class="pipe-item lit"><div class="pipe-n">1</div><div class="pipe-label">Novo Lead</div><div class="pipe-badge">G2</div></div>
+    <div class="pipe-item lit"><div class="pipe-n">2</div><div class="pipe-label">Em Atendimento</div><div class="pipe-badge">G3</div></div>
+    <div class="pipe-item lit"><div class="pipe-n">3</div><div class="pipe-label">Qualificado</div><div class="pipe-badge">G4</div></div>
+    <div class="pipe-item lit"><div class="pipe-n">4</div><div class="pipe-label">Handoff</div><div class="pipe-badge">G5</div></div>
+    <div class="pipe-item lit"><div class="pipe-n">5</div><div class="pipe-label">Agendado</div><div class="pipe-badge">G6</div></div>
+    <div class="pipe-item"><div class="pipe-n">6</div><div class="pipe-label">Procedimento</div><div class="pipe-badge">—</div></div>
+  </div>
+
+  <div class="cards">
+    <div class="card" style="--gc:var(--c1)"><div class="card-stripe"></div><div class="card-tag">FRIO-SEM-RESPOSTA</div><div class="card-name">Atendimento errado, sem resposta</div><div class="card-desc">Receberam "Boa noite, tudo bem?" e nunca responderam. Nenhum atendimento consultivo aconteceu.</div><div class="card-temp">❄️ Muito frio</div><div class="card-ghost">G1</div></div>
+    <div class="card" style="--gc:var(--c2)"><div class="card-stripe"></div><div class="card-tag">FRIO-SEM-NOME</div><div class="card-name">Não responderam à abertura da IA</div><div class="card-desc">A IA fez a abertura correta mas o lead não respondeu. Parado no início do fluxo.</div><div class="card-temp">❄️ Frio</div><div class="card-ghost">G2</div></div>
+    <div class="card" style="--gc:var(--c3)"><div class="card-stripe"></div><div class="card-tag">DIAGNOSTICO-INCOMPLETO</div><div class="card-name">Travaram no meio do diagnóstico</div><div class="card-desc">Responderam, deram o nome, mas sumiram antes de completar as 3 perguntas do diagnóstico.</div><div class="card-temp">🌤 Morno</div><div class="card-ghost">G3</div></div>
+    <div class="card" style="--gc:var(--c4)"><div class="card-stripe"></div><div class="card-tag">QUALIFICADO-SEM-AVANCO</div><div class="card-name">Diagnóstico completo, sem avanço</div><div class="card-desc">Verbalizaram dor, tempo e resultado desejado. Os leads mais valiosos da base.</div><div class="card-temp">🔥 Quente</div><div class="card-ghost">G4</div></div>
+    <div class="card" style="--gc:var(--c5)"><div class="card-stripe"></div><div class="card-tag">HANDOFF-SEM-AGENDAMENTO</div><div class="card-name">IA passou o bastão, humano não converteu</div><div class="card-desc">A IA aqueceu e passou para a equipe. O agendamento não aconteceu. Problema no processo humano.</div><div class="card-temp">🔥 Muito quente</div><div class="card-ghost">G5</div></div>
+    <div class="card" style="--gc:var(--c6)"><div class="card-stripe"></div><div class="card-tag">AGENDADO-SEM-RETORNO</div><div class="card-name">Agendaram mas não apareceram</div><div class="card-desc">Chegaram a marcar horário mas não compareceram ou não fecharam o procedimento.</div><div class="card-temp">🔥 Quente</div><div class="card-ghost">G6</div></div>
+    <div class="card" style="--gc:var(--c7)"><div class="card-stripe"></div><div class="card-tag">OBJECAO-PRECO</div><div class="card-name">Travam na objeção de preço</div><div class="card-desc">Em qualquer etapa, o preço foi levantado como barreira e a conversa parou aí.</div><div class="card-temp">🌤 Morno</div><div class="card-ghost">G7</div></div>
+  </div>
+</section>
+
+<!-- ══════════════ G1 ══════════════ -->
+<section class="grp" id="g1" style="--gc:var(--c1)">
+  <div class="grp-watermark">G1</div>
+  <div class="grp-head">
+    <div>
+      <div class="grp-tag">FRIO-SEM-RESPOSTA</div>
+      <div class="grp-title">ATENDIMENTO ERRADO,<br>SEM RESPOSTA</div>
+      <p class="grp-body">Esses leads receberam uma mensagem genérica — "Boa noite, tudo bem?" — que não gerou nem curiosidade nem conexão. Para eles, a Renovare foi mais um número desconhecido. A cadência começa do zero: apresenta a clínica, cria interesse genuíno e vai aquecendo ao longo dos dias com provas sociais e perguntas consultivas.</p>
+    </div>
+    <div class="grp-info">
+      <div><div class="info-l">Pipeline</div><div class="info-v">Fora — sem interação real</div></div>
+      <div><div class="info-l">Temperatura</div><div class="info-v">❄️ Muito frio</div></div>
+      <div><div class="info-l">Responsável</div><div class="info-v">Equipe humana</div></div>
+      <div><div class="info-l">Meta da cadência</div><div class="info-v">Gerar primeira resposta e iniciar diagnóstico</div></div>
+    </div>
+  </div>
+  <div class="cadence">
+    <div class="cad-label">Cadência de 5 mensagens — 10 dias</div>
+
+    <div class="msg-card open">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 1</span>
+        <span class="msg-title">Primeira apresentação real</span>
+        <span class="msg-sub">Abertura</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Apresentar a Renovare de forma consultiva, diferente do "boa noite, tudo bem?" que esse lead recebeu.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Próximo, sem pressão. Como alguém que se importa com a situação do lead — não como vendedor.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Oi! Aqui é da Clínica Renovare 🤍 Você chegou até a gente há um tempo pelo nosso anúncio e a gente nunca conseguiu conversar de verdade. Queria entender o que chamou sua atenção — o que mais te incomoda hoje no seu rosto ou aparência?</div>
+        <div class="msg-note"><strong>Atenção:</strong> Nenhuma menção a procedimentos, promoções ou preços. O único objetivo é gerar a primeira resposta.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 3</span>
+        <span class="msg-title">Prova social com resultado visual</span>
+        <span class="msg-sub">Confiança</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Mostrar resultado real da Dra. Marcelly antes de falar qualquer coisa técnica. A imagem faz o trabalho.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Leve, como quem compartilha algo bonito — não como quem tenta vender.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Olha esse resultado que saiu essa semana aqui na clínica ✨ [INSERIR FOTO DE RESULTADO REAL] A Dra. Marcelly trabalha sempre com naturalidade — sem forçar, sem exagero. Cada tratamento é pensado pro rosto de cada pessoa. Se quiser conversar sobre o que você está buscando, pode me chamar aqui 🤍</div>
+        <div class="msg-note"><strong>Obrigatório:</strong> Substituir o marcador pela foto real de um resultado da Dra. Marcelly. Quanto mais o resultado for de um procedimento que o lead possa se identificar, melhor.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 5</span>
+        <span class="msg-title">Pergunta consultiva direta</span>
+        <span class="msg-sub">Diagnóstico</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Fazer uma pergunta simples que dê abertura para o lead falar sobre si. Sem mostrar produto.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Consultivo e curioso — como um profissional que quer entender antes de sugerir qualquer coisa.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Tenho curiosidade em saber: o que você mudaria no seu rosto se pudesse — sem precisar pensar em preço ou processo, só no resultado que você mais quer ver?</div>
+        <div class="msg-note"><strong>Por que essa pergunta:</strong> Remove a barreira do "quanto custa" antes mesmo que ela apareça. Convida o lead a sonhar com o resultado. Quem responde está pronto para o diagnóstico.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 7</span>
+        <span class="msg-title">Autoridade da Dra. Marcelly</span>
+        <span class="msg-sub">Credibilidade</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Construir confiança na profissional antes de qualquer passo de agendamento. Autoridade gera segurança.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Seguro e informativo — sem soar como propaganda.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>A Dra. Marcelly é cirurgiã-dentista especialista em harmonização orofacial e professora da área. Isso significa que ela não só realiza os procedimentos — ela ensina outras profissionais a fazer. Cada atendimento aqui na Renovare começa com uma avaliação detalhada do rosto, entendendo o que vai trazer harmonia real pra cada pessoa. Se quiser dar uma olhada nos resultados: instagram.com/dra.marcellytrigoli 🤍</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 10</span>
+        <span class="msg-title">Encerramento com porta aberta</span>
+        <span class="msg-sub">Fechamento</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Última mensagem da cadência. Não forçar — deixar a porta aberta sem criar pressão.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Leve, sem cobrança. Deixa o lead com a sensação de que pode voltar quando quiser.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Não vou insistir mais — mas fica a vontade para me chamar quando quiser conversar 🤍 A Renovare está aqui, e quando você se sentir pronta, a gente cuida do resto com calma e cuidado.</div>
+        <div class="msg-note"><strong>Após essa mensagem:</strong> Encerrar ciclo. Se não houve resposta em 10 dias, marcar como inativo. Não enviar mais mensagens espontâneas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ G2 ══════════════ -->
+<section class="grp" id="g2" style="--gc:var(--c2)">
+  <div class="grp-watermark">G2</div>
+  <div class="grp-head">
+    <div>
+      <div class="grp-tag">FRIO-SEM-NOME</div>
+      <div class="grp-title">NÃO RESPONDERAM<br>À ABERTURA DA IA</div>
+      <p class="grp-body">A IA fez a abertura correta — saudou, deu boas-vindas e pediu o nome — mas o lead ficou em silêncio. Ele viu o anúncio, clicou, chegou até o WhatsApp e parou. Isso significa que havia interesse, mas algo impediu a resposta no momento. A cadência precisa reacender essa curiosidade inicial sem replicar a mesma mensagem.</p>
+    </div>
+    <div class="grp-info">
+      <div><div class="info-l">Pipeline</div><div class="info-v">Posição 1 — Novo Lead</div></div>
+      <div><div class="info-l">Temperatura</div><div class="info-v">❄️ Frio</div></div>
+      <div><div class="info-l">Responsável</div><div class="info-v">Equipe humana (IA assume ao responder)</div></div>
+      <div><div class="info-l">Meta da cadência</div><div class="info-v">Gerar primeira resposta e devolver ao fluxo da IA</div></div>
+    </div>
+  </div>
+  <div class="cadence">
+    <div class="cad-label">Cadência de 5 mensagens — 9 dias</div>
+
+    <div class="msg-card open">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 1</span>
+        <span class="msg-title">Retomada leve com curiosidade</span>
+        <span class="msg-sub">Abertura</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Retomar sem repetir o pedido de nome. Ir direto para a motivação — o que chamou a atenção do lead.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Curioso e acolhedor. Sem cobrança por resposta.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Oi! Aqui é da Clínica Renovare 🤍 Percebi que não conseguimos conversar ainda. Você chegou até a gente pelo nosso anúncio — algo chamou sua atenção. Quer me contar o que foi?</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 3</span>
+        <span class="msg-title">Resultado visual para despertar interesse</span>
+        <span class="msg-sub">Prova social</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Mostrar que a Renovare entrega resultado real antes de qualquer argumentação verbal.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Natural, como quem compartilha algo bonito — não como quem está tentando vender.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Saiu um resultado lindo essa semana aqui na clínica ✨ [INSERIR FOTO] Se tiver curiosidade sobre o que a gente faz, pode me perguntar o que quiser — sem compromisso nenhum 🤍</div>
+        <div class="msg-note"><strong>Obrigatório:</strong> Inserir foto real de resultado da Dra. Marcelly.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 5</span>
+        <span class="msg-title">Pergunta sobre a dor sem citar procedimento</span>
+        <span class="msg-sub">Diagnóstico</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Abrir espaço para o lead falar sobre si. Quem responde essa pergunta está pronto para conversar.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Consultivo. Demonstra que o interesse é genuíno, não comercial.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Uma pergunta rápida: o que mais te incomoda hoje na sua aparência? Pode ser qualquer coisa — não precisa saber o nome do procedimento. Só quero entender o que te motiva.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 7</span>
+        <span class="msg-title">Diferencial da Renovare e avaliação sem compromisso</span>
+        <span class="msg-sub">Valor</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Apresentar a avaliação como próximo passo natural, sem pressão de fechamento.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Propositivo mas leve. O lead sente que tem controle sobre a decisão.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Aqui na Renovare a gente não indica nada antes de entender o seu rosto de perto. A avaliação com a Dra. Marcelly é justamente pra isso — ela analisa, explica o que faz sentido pro seu caso e você decide com calma. Sem nenhum compromisso de fechar nada. Quer ver como é?</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 9</span>
+        <span class="msg-title">Porta aberta sem pressão</span>
+        <span class="msg-sub">Encerramento</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Encerrar o ciclo sem desgastar. Deixar o lead com uma impressão positiva da clínica.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Acolhedor e sem cobrança. Última mensagem, sem follow adicional.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Tudo bem! Não vou te incomodar mais por aqui 🤍 Mas se em algum momento quiser conversar sobre o que te incomoda ou quiser saber mais sobre o que a Renovare faz, é só me chamar. A gente está aqui.</div>
+        <div class="msg-note"><strong>Após essa mensagem:</strong> Encerrar cadência. Sem novos contatos espontâneos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ G3 ══════════════ -->
+<section class="grp" id="g3" style="--gc:var(--c3)">
+  <div class="grp-watermark">G3</div>
+  <div class="grp-head">
+    <div>
+      <div class="grp-tag">DIAGNOSTICO-INCOMPLETO</div>
+      <div class="grp-title">TRAVARAM NO MEIO<br>DO DIAGNÓSTICO</div>
+      <p class="grp-body">Esses leads deram o passo mais difícil: responderam. Deram o nome, começaram a conversa — mas pararam antes de completar o diagnóstico. O vínculo existe. A retomada pode ser pessoal, direta e muito mais fácil do que recomeçar do zero. Use o que já foi dito.</p>
+    </div>
+    <div class="grp-info">
+      <div><div class="info-l">Pipeline</div><div class="info-v">Posição 2 — Em Atendimento</div></div>
+      <div><div class="info-l">Temperatura</div><div class="info-v">🌤 Morno</div></div>
+      <div><div class="info-l">Responsável</div><div class="info-v">IA pode retomar ou equipe humana</div></div>
+      <div><div class="info-l">Meta da cadência</div><div class="info-v">Completar o diagnóstico e avançar para apresentação de valor</div></div>
+    </div>
+  </div>
+  <div class="cadence">
+    <div class="cad-label">Cadência de 5 mensagens — 10 dias</div>
+
+    <div class="msg-card open">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 1</span>
+        <span class="msg-title">Retomada direta de onde parou</span>
+        <span class="msg-sub">Continuidade</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Retomar com naturalidade, sem repetir o que já foi dito. Avançar direto para a pergunta de resultado desejado.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Familiar e leve — como se estivesse retomando uma conversa com alguém que já conhece.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Oi, tudo bem? Aqui é da Renovare 🤍 A gente começou a conversar e perdemos o fio no caminho. Queria retomar — o que você mais queria mudar ou melhorar? Qual seria o resultado ideal pra você?</div>
+        <div class="msg-note"><strong>Não repita</strong> o pedido de nome nem as perguntas já respondidas. Vá direto para a próxima etapa do diagnóstico.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 3</span>
+        <span class="msg-title">Resultado de procedimento relacionado</span>
+        <span class="msg-sub">Prova social</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Mostrar resultado de procedimento alinhado com o que o lead mencionou antes de parar.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Visual e direto. Deixar a imagem fazer o trabalho.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Olha esse resultado que a Dra. Marcelly fez essa semana ✨ [INSERIR FOTO] É muito parecido com o que você me contou estar buscando. Quer entender como ficaria no seu caso?</div>
+        <div class="msg-note"><strong>Personalize a foto:</strong> Use resultado do procedimento relacionado com o que o lead comentou no diagnóstico parcial.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 5</span>
+        <span class="msg-title">Pergunta de profundidade da dor</span>
+        <span class="msg-sub">Diagnóstico</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Completar a pergunta 2 do diagnóstico (há quanto tempo). Entender o nível de urgência do lead.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Empático e genuinamente curioso. Não robótico.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Tenho curiosidade: há quanto tempo isso te incomoda? Às vezes a gente convive com algo por tanto tempo que já nem lembra como é não pensar nisso. Me conta como é pra você.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 7</span>
+        <span class="msg-title">Avaliação como próximo passo</span>
+        <span class="msg-sub">Proposta</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Propor a avaliação como resposta natural à conversa que ficou incompleta.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Consultivo. Posiciona a avaliação como solução para a dúvida — não como passo de venda.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>A melhor forma de entender o que realmente faz sentido pro seu rosto é na avaliação com a Dra. Marcelly. Ela olha de perto, entende sua queixa e te explica o que indicaria — sem compromisso de nada. Essa semana tem horário disponível. Quer que eu te passe as opções?</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 10</span>
+        <span class="msg-title">Encerramento com convite aberto</span>
+        <span class="msg-sub">Encerramento</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Fechar o ciclo sem pressão. O lead deve sentir que a porta está aberta, não que foi descartado.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Caloroso e genuíno.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Não vou te chamar mais por aqui, mas fica o convite aberto 🤍 Quando você se sentir pronta pra dar esse passo, é só me chamar que a gente organiza tudo com calma.</div>
+        <div class="msg-note"><strong>Após essa mensagem:</strong> Encerrar cadência.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ G4 ══════════════ -->
+<section class="grp" id="g4" style="--gc:var(--c4)">
+  <div class="grp-watermark">G4</div>
+  <div class="grp-head">
+    <div>
+      <div class="grp-tag">QUALIFICADO-SEM-AVANCO</div>
+      <div class="grp-title">DIAGNÓSTICO COMPLETO,<br>SEM AVANÇO</div>
+      <p class="grp-body">Os leads mais valiosos da base. Dor identificada, tempo de convivência registrado, resultado desejado verbalizado — tudo no CRM. O único problema foi que a conversa não avançou para o agendamento. A reativação usa exatamente o que o lead disse. Não reinventa a roda: conecta a solução às próprias palavras dele.</p>
+    </div>
+    <div class="grp-info">
+      <div><div class="info-l">Pipeline</div><div class="info-v">Posição 3 — Qualificado</div></div>
+      <div><div class="info-l">Temperatura</div><div class="info-v">🔥 Quente</div></div>
+      <div><div class="info-l">Responsável</div><div class="info-v">Equipe humana — abordagem direta</div></div>
+      <div><div class="info-l">Meta da cadência</div><div class="info-v">Converter em agendamento de avaliação</div></div>
+    </div>
+  </div>
+  <div class="cadence">
+    <div class="cad-label">Cadência de 5 mensagens — 9 dias</div>
+
+    <div class="msg-card open">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 1</span>
+        <span class="msg-title">Conexão com a dor registrada no CRM</span>
+        <span class="msg-sub">Personalização</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Mostrar que a conversa anterior foi ouvida e lembrada. Usar o resumo do CRM para personalizar completamente.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Pessoal e direto. Esse lead já está quente — sem rodeios.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Oi! Aqui é da Renovare 🤍 Lembro que a gente conversou sobre o que te incomoda e a Dra. Marcelly tem exatamente o que faz sentido pro seu caso. Queria saber se você ainda está pensando nisso — porque essa semana ainda tem espaço na agenda dela pra avaliação.</div>
+        <div class="msg-note"><strong>Para o operador:</strong> Antes de enviar, ler o resumo no CRM e adaptar a mensagem para mencionar a queixa específica do lead. Ex: "conversou sobre a papada", "sobre as olheiras", "sobre o contorno do rosto". Quanto mais específico, maior a taxa de resposta.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 2</span>
+        <span class="msg-title">Resultado do procedimento de interesse</span>
+        <span class="msg-sub">Prova social</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Mostrar o resultado mais alinhado com a queixa registrada no CRM. Tornar o resultado tangível.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Direto. A imagem faz 80% do trabalho — o texto só contextualiza.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Olha esse resultado que saiu essa semana ✨ [INSERIR FOTO DO PROCEDIMENTO DE INTERESSE] Muito parecido com o que você me contou que queria. Quer conversar sobre como seria no seu caso?</div>
+        <div class="msg-note"><strong>Selecione a foto</strong> mais próxima da queixa do lead (papada → lipo de papada, olheiras → preenchimento de olheira, etc).</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 4</span>
+        <span class="msg-title">Avaliação como resposta à dor</span>
+        <span class="msg-sub">Proposta</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Posicionar a avaliação como a resposta natural para tudo que foi compartilhado. Sem pressão de fechamento.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Consultivo. A avaliação é apresentada como serviço, não como etapa de venda.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>A Dra. Marcelly não indica nada antes de ver o rosto de perto. A avaliação é justamente pra isso — ela entende sua queixa real, analisa as proporções e te explica o que faria sentido pra você, com naturalidade. Você sai da avaliação sabendo exatamente o que fazer, sem compromisso de fechar nada. Quer marcar?</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 6</span>
+        <span class="msg-title">Urgência real de agenda</span>
+        <span class="msg-sub">Urgência</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Criar senso de momento com agenda limitada. Só usar se realmente houver horários disponíveis essa semana.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Direto e simples. Nada de dramático — só a informação real.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Os horários de avaliação dessa semana estão preenchendo rápido ✨ Se quiser garantir o seu, é só me falar agora que eu reservo.</div>
+        <div class="msg-note"><strong>Atenção:</strong> Só usar essa mensagem se houver horários reais disponíveis. Urgência falsa destrói confiança.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 9</span>
+        <span class="msg-title">Encerramento com a dor como âncora</span>
+        <span class="msg-sub">Encerramento</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Última mensagem. Relembrar a dor de forma empática, sem pressionar. Deixar a reflexão como semente.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Empático e genuíno. Não comercial.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Não vou te incomodar mais 🤍 Mas só quero deixar uma coisa: o que te incomoda não vai desaparecer sozinho — e você merece se sentir bem com o que vê no espelho. Quando estiver pronta, a Renovare está aqui.</div>
+        <div class="msg-note"><strong>Após essa mensagem:</strong> Encerrar cadência.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ G5 ══════════════ -->
+<section class="grp" id="g5" style="--gc:var(--c5)">
+  <div class="grp-watermark">G5</div>
+  <div class="grp-head">
+    <div>
+      <div class="grp-tag">HANDOFF-SEM-AGENDAMENTO</div>
+      <div class="grp-title">IA PASSOU O BASTÃO,<br>HUMANO NÃO CONVERTEU</div>
+      <p class="grp-body">A IA fez tudo certo. Aqueceu, qualificou, passou para a equipe. O agendamento não aconteceu — e o problema foi do processo humano, não do lead. Esses são os mais próximos do fechamento. A cadência é direta, consultiva e rápida. Não tem espaço para rodeios aqui.</p>
+    </div>
+    <div class="grp-info">
+      <div><div class="info-l">Pipeline</div><div class="info-v">Posição 4 — Handoff (parado)</div></div>
+      <div><div class="info-l">Temperatura</div><div class="info-v">🔥 Muito quente</div></div>
+      <div><div class="info-l">Responsável</div><div class="info-v">Equipe humana — abordagem direta</div></div>
+      <div><div class="info-l">Meta da cadência</div><div class="info-v">Converter em agendamento de avaliação</div></div>
+    </div>
+  </div>
+  <div class="cadence">
+    <div class="cad-label">Cadência de 5 mensagens — 8 dias</div>
+
+    <div class="msg-card open">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 1</span>
+        <span class="msg-title">Retomada direta com proposta de avaliação</span>
+        <span class="msg-sub">Abertura</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Retomar sem drama. Esse lead estava pronto — a abordagem é direta e facilita o próximo passo.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Direto e acolhedor. Sem cobrar o que aconteceu antes.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Oi! Aqui é da Renovare 🤍 A gente conversou há um tempo e eu queria retomar. A Dra. Marcelly tem horários disponíveis essa semana para avaliação — é uma consulta sem compromisso, onde ela analisa seu rosto e te explica o que faria sentido pro seu caso. Quer que eu verifique as opções pra você?</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 2</span>
+        <span class="msg-title">Resultado e autoridade da profissional</span>
+        <span class="msg-sub">Confiança</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Reforçar a confiança na Dra. Marcelly com resultado visual e credencial real.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Seguro. Deixa o resultado falar mais que as palavras.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>[INSERIR FOTO DE RESULTADO] A Dra. Marcelly é cirurgiã-dentista, especialista em harmonização orofacial e professora. Cada resultado é planejado individualmente — sem fórmula pronta, sem exagero ✨</div>
+        <div class="msg-note"><strong>Obrigatório:</strong> Inserir foto real de resultado.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 4</span>
+        <span class="msg-title">Urgência de agenda</span>
+        <span class="msg-sub">Urgência</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Criar senso de momento com agenda limitada. Curto e direto.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Objetivo. Duas frases, nada mais.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Os horários dessa semana estão preenchendo ✨ Se quiser garantir o seu, me fala agora que eu reservo.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 6</span>
+        <span class="msg-title">Método Triglow como diferencial</span>
+        <span class="msg-sub">Diferencial</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Apresentar o diferencial exclusivo da Dra. Marcelly como razão para escolher a Renovare.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Exclusivo e confiante — sem arrogância.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>A Dra. Marcelly tem um método próprio — o Triglow — focado em naturalidade e planejamento estratégico do rosto. Não é uma fórmula padrão: cada rosto recebe um planejamento do zero. É por isso que os resultados daqui têm essa identidade de naturalidade e harmonia. Quer conhecer de perto?</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 8</span>
+        <span class="msg-title">Encerramento com decisão na mão do lead</span>
+        <span class="msg-sub">Encerramento</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Encerrar com dignidade. Colocar a decisão na mão do lead — sem cobrar.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Respeitoso e acolhedor. A última impressão importa.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Vou deixar a decisão com você 🤍 Quando sentir que é o momento certo, é só me chamar que a gente agenda rapidinho. A Renovare está aqui.</div>
+        <div class="msg-note"><strong>Após essa mensagem:</strong> Encerrar cadência.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ G6 ══════════════ -->
+<section class="grp" id="g6" style="--gc:var(--c6)">
+  <div class="grp-watermark">G6</div>
+  <div class="grp-head">
+    <div>
+      <div class="grp-tag">AGENDADO-SEM-RETORNO</div>
+      <div class="grp-title">AGENDARAM MAS<br>NÃO APARECERAM</div>
+      <p class="grp-body">Chegaram ao ponto mais concreto de todos: marcaram horário. Isso é intenção clara. Se não apareceram, algo aconteceu — imprevisto, esquecimento, hesitação de última hora. A cadência é acolhedora, sem cobrar, facilitando o reagendamento como algo natural e sem constrangimento.</p>
+    </div>
+    <div class="grp-info">
+      <div><div class="info-l">Pipeline</div><div class="info-v">Posição 5 — Agendado (parado)</div></div>
+      <div><div class="info-l">Temperatura</div><div class="info-v">🔥 Quente</div></div>
+      <div><div class="info-l">Responsável</div><div class="info-v">Equipe humana — tom acolhedor</div></div>
+      <div><div class="info-l">Meta da cadência</div><div class="info-v">Reagendar sem constrangimento</div></div>
+    </div>
+  </div>
+  <div class="cadence">
+    <div class="cad-label">Cadência de 5 mensagens — 9 dias</div>
+
+    <div class="msg-card open">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 1</span>
+        <span class="msg-title">Reagendamento acolhedor</span>
+        <span class="msg-sub">Acolhimento</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Facilitar o reagendamento sem criar constrangimento. Nunca usar "você faltou" ou "perdemos seu horário".</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Completamente acolhedor. Sem cobrança, sem julgamento.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Oi, tudo bem? 🤍 Você tinha horário marcado com a Dra. Marcelly — imaginamos que algo deve ter surgido, acontece com todo mundo. Quando quiser remarcar, é só me falar que a gente verifica os próximos horários disponíveis pra você.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 3</span>
+        <span class="msg-title">Resultado para reacender o desejo</span>
+        <span class="msg-sub">Desejo</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Reacender o desejo pelo resultado que motivou o agendamento original. Visual é o gatilho mais forte.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Inspirador e leve. Não comercial.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Olha esse resultado lindo que saiu essa semana 🤍 [INSERIR FOTO] Esse tipo de resultado é o que a Dra. Marcelly faz com cuidado e planejamento — sempre com naturalidade. Quando quiser viver isso também, a gente está aqui ✨</div>
+        <div class="msg-note"><strong>Obrigatório:</strong> Inserir foto de resultado da Renovare.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 5</span>
+        <span class="msg-title">Disponibilidade de horário essa semana</span>
+        <span class="msg-sub">Facilidade</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Reduzir o atrito do reagendamento ao mínimo. Oferecer ativamente a disponibilidade.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Prático e acolhedor. Facilitar, não pressionar.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Essa semana ainda tem bons horários disponíveis com a Dra. Marcelly ✨ Se quiser que eu já te passe as opções, é só falar — a gente organiza rapidinho.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 7</span>
+        <span class="msg-title">Lembrete da transformação que o lead buscava</span>
+        <span class="msg-sub">Ancoragem</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Reconectar o lead com o motivo original que o fez agendar. A dor ainda existe — o resultado ainda é possível.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Empático e motivador. Sem citar procedimentos ou preços.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Você chegou até a ponto de marcar uma avaliação — isso significa que o desejo de se sentir melhor é real. Não deixa isso pra depois 🤍 Quando quiser retomar, me chama aqui que a gente cuida de tudo com calma.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 9</span>
+        <span class="msg-title">Porta sempre aberta</span>
+        <span class="msg-sub">Encerramento</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Encerrar deixando a Renovare como referência positiva na memória do lead.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Caloroso e sem pressão.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>A porta está sempre aberta aqui na Renovare 🤍 Quando sentir que é o momento certo, pode me chamar a qualquer hora — a gente cuida do resto com muito carinho.</div>
+        <div class="msg-note"><strong>Após essa mensagem:</strong> Encerrar cadência.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ G7 ══════════════ -->
+<section class="grp" id="g7" style="--gc:var(--c7)">
+  <div class="grp-watermark">G7</div>
+  <div class="grp-head">
+    <div>
+      <div class="grp-tag">OBJECAO-PRECO</div>
+      <div class="grp-title">TRAVAM NA<br>OBJEÇÃO DE PREÇO</div>
+      <p class="grp-body">Em qualquer etapa, o preço apareceu como barreira e a conversa parou. O erro clássico é responder o preço — seja justificando, seja dando desconto. A estratégia certa é desancorar: tirar o foco do custo e ancorá-lo no resultado que o lead quer e na dor que ele continua tendo sem o tratamento.</p>
+    </div>
+    <div class="grp-info">
+      <div><div class="info-l">Pipeline</div><div class="info-v">Qualquer posição — identificado por objeção</div></div>
+      <div><div class="info-l">Temperatura</div><div class="info-v">🌤 Morno</div></div>
+      <div><div class="info-l">Responsável</div><div class="info-v">Equipe humana — abordagem consultiva</div></div>
+      <div><div class="info-l">Meta da cadência</div><div class="info-v">Desancorar preço e reancorar no resultado</div></div>
+    </div>
+  </div>
+  <div class="cadence">
+    <div class="cad-label">Cadência de 5 mensagens — 10 dias</div>
+
+    <div class="msg-card open">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 1</span>
+        <span class="msg-title">Desancoragem do preço — foco no resultado</span>
+        <span class="msg-sub">Reframe</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Mover a conversa de volta para o resultado desejado. Não responder o preço — nem direta nem indiretamente.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Consultivo e empático. Como um especialista que se preocupa com o problema, não com a venda.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Oi! Aqui é da Renovare 🤍 Queria retomar nossa conversa. Entendo que o investimento pode pesar na decisão — mas antes de falar de valor, o mais importante é entender o que realmente faz sentido pro seu rosto. Às vezes o que parece caro não é o que você precisa, e o que parece simples não resolve o que te incomoda de verdade. A avaliação com a Dra. Marcelly é exatamente pra isso: ela analisa seu caso, explica o que indicaria e você decide com todas as informações na mão. Quer dar esse primeiro passo?</div>
+        <div class="msg-note"><strong>O que nunca fazer:</strong> Dar desconto sem o lead pedir. Justificar o preço com qualidade. Comparar com concorrência. Essas respostas reforçam o preço como objeção central.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 3</span>
+        <span class="msg-title">A dor que continua existindo sem tratamento</span>
+        <span class="msg-sub">Urgência emocional</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Lembrar que o problema não desaparece enquanto a decisão é adiada. Ancoragem emocional na dor.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Empático e reflexivo. Não dramático — genuíno.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Tenho pensado na nossa conversa. O que te incomoda hoje vai continuar te incomodando enquanto a decisão for adiada. Não estou falando isso pra pressionar — estou falando porque você merece se sentir bem, e isso tem valor 🤍 Quando quiser conversar com calma sobre o que faz sentido pro seu caso, estou aqui.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 5</span>
+        <span class="msg-title">Parcelamento como facilitador — não como desconto</span>
+        <span class="msg-sub">Facilidade</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Mencionar parcelamento como facilidade prática, nunca como desconto. Contexto completamente diferente.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Prático e informativo. Apresentar como serviço, não como concessão.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Só queria lembrar: aqui na Renovare a gente parcela em até 10x ✨ Às vezes o que parece distante fica bem mais viável assim. E o mais importante é que você consiga cuidar de você sem pressão. Quer entender as opções na avaliação?</div>
+        <div class="msg-note"><strong>Sequência obrigatória:</strong> Esse script só deve ser usado depois do Script 01. Nunca como primeira abordagem — reforçaria o preço como problema central.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 7</span>
+        <span class="msg-title">Resultado visual como prova de valor</span>
+        <span class="msg-sub">Prova social</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Mostrar que o resultado entregue pela Renovare justifica o investimento — sem falar em preço.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Visual e confiante. O resultado é o argumento mais forte — mais que qualquer justificativa verbal.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Olha o que saiu essa semana aqui 🤍 [INSERIR FOTO DE RESULTADO] Esse é o tipo de resultado que a Dra. Marcelly entrega — com planejamento, com cuidado, com naturalidade. Quando quiser ter isso também, me chama aqui ✨</div>
+        <div class="msg-note"><strong>Obrigatório:</strong> Inserir foto real de resultado da Renovare.</div>
+      </div>
+    </div>
+
+    <div class="msg-card">
+      <div class="msg-head" onclick="tog(this)">
+        <span class="msg-day">DIA 10</span>
+        <span class="msg-title">Encerramento com autoestima como âncora final</span>
+        <span class="msg-sub">Encerramento</span>
+        <span class="msg-chevron">▼</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-context">
+          <div class="msg-ctx-item"><div class="ctx-l">Objetivo</div><div class="ctx-v">Encerrar com uma âncora emocional forte. Deixar o lead com uma reflexão genuína sobre se importar consigo mesma.</div></div>
+          <div class="msg-ctx-item"><div class="ctx-l">Tom</div><div class="ctx-v">Empático, caloroso. Não comercial. A última mensagem define como o lead lembra da Renovare.</div></div>
+        </div>
+        <div class="wa-label">Mensagem</div>
+        <div class="wa-bubble"><button class="wa-copy" onclick="cp(this)">copiar</button>Não vou te incomodar mais 🤍 Só quero deixar isso: cuidar de você não é luxo — é necessidade. Quando sentir que chegou o momento certo, a Renovare está aqui, sem julgamento e com todo o cuidado do mundo.</div>
+        <div class="msg-note"><strong>Após essa mensagem:</strong> Encerrar cadência.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUÇÃO -->
+<section class="sec" id="exec">
+  <div class="sec-eye">Como executar</div>
+  <div class="sec-h">REGRAS DE<br>EXECUÇÃO</div>
+  <p class="sec-p">A segmentação só funciona com disciplina na execução. Essas são as regras que garantem que a reativação funcione — e não vire spam.</p>
+  <div class="strat-grid">
+    <div class="strat-card"><span class="strat-icon">🗂</span><div class="strat-t">Etiquete antes de disparar</div><div class="strat-b">Antes de qualquer mensagem, todos os leads precisam estar corretamente etiquetados. Verificar posição no pipeline, histórico e resumo do CRM. Mensagem errada para o grupo errado é pior que não enviar.</div></div>
+    <div class="strat-card"><span class="strat-icon">🎯</span><div class="strat-t">Comece pelos grupos mais quentes</div><div class="strat-b">G5 → G4 → G6 → G3 → G7 → G2 → G1. Leads quentes convertem mais rápido. Não sobrecarregue o time com leads frios enquanto os quentes ficam esperando.</div></div>
+    <div class="strat-card"><span class="strat-icon">📝</span><div class="strat-t">Leia o CRM antes de cada mensagem</div><div class="strat-b">Para G3, G4 e G5, ler o resumo do CRM antes de enviar é obrigatório. A personalização é o que separa reativação de spam. O texto é uma base — adapte sempre.</div></div>
+    <div class="strat-card"><span class="strat-icon">📸</span><div class="strat-t">Foto de resultado é obrigatória</div><div class="strat-b">Toda mensagem que pede foto de resultado precisa de uma foto real. Resultado sem imagem perde 80% do impacto. Crie uma pasta de resultados organizados por procedimento para facilitar.</div></div>
+    <div class="strat-card"><span class="strat-icon">🤖</span><div class="strat-t">IA assume quando o lead responde</div><div class="strat-b">Para G1, G2 e G3, quando o lead responder, a IA pode assumir o atendimento normalmente. Para G4 em diante, equipe humana mantém o controle — lead está em fase avançada.</div></div>
+    <div class="strat-card"><span class="strat-icon">📊</span><div class="strat-t">Meça a taxa de resposta por grupo</div><div class="strat-b">Registrar: leads contactados, responderam, agendaram. Esses dados calibram os próximos ciclos de reativação e indicam quais grupos têm mais potencial.</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">DESCOMPLIQUEI</div>
+  <div class="foot-note">Clínica Renovare · Reativação de Base · Metodologia Descompliquei Marketing</div>
+</footer>
+
+<script>
+function tog(h){
+  const b=h.closest('.msg-card');
+  b.classList.toggle('open');
+}
+function cp(btn){
+  const txt=btn.closest('.wa-bubble').innerText.replace('copiar','').replace('copiado!','').trim();
+  navigator.clipboard.writeText(txt).then(()=>{
+    btn.textContent='copiado!';
+    btn.classList.add('done');
+    setTimeout(()=>{btn.textContent='copiar';btn.classList.remove('done')},1800);
+  });
+}
+
+// nav active
+const secs=[...document.querySelectorAll('section[id],.grp[id]')];
+const links=[...document.querySelectorAll('nav a')];
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));
+    }
+  });
+},{rootMargin:'-35% 0px -60% 0px'});
+secs.forEach(s=>obs.observe(s));
+
+// open first of each group
+document.querySelectorAll('.grp').forEach(g=>{
+  const first=g.querySelector('.msg-card');
+  if(first)first.classList.add('open');
+});
+</script>
+</body>
+</html>
